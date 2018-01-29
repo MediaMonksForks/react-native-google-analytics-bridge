@@ -171,11 +171,13 @@ public class GoogleAnalyticsBridge extends ReactContextBaseJavaModule {
                 hit.addProduct(this.getPurchaseProduct(product));
             }
 
-            ReadableMapKeySetIterator iterator = dimensionIndexValues.keySetIterator();
-            while (iterator.hasNextKey()) {
-                String dimensionIndex = iterator.nextKey();
-                String dimensionValue = dimensionIndexValues.getString(dimensionIndex);
-                hit.setCustomDimension(Integer.parseInt(dimensionIndex), dimensionValue);
+            if (dimensionIndexValues != null) {
+                ReadableMapKeySetIterator iterator = dimensionIndexValues.keySetIterator();
+                while (iterator.hasNextKey()) {
+                    String dimensionIndex = iterator.nextKey();
+                    String dimensionValue = dimensionIndexValues.getString(dimensionIndex);
+                    hit.setCustomDimension(Integer.parseInt(dimensionIndex), dimensionValue);
+                }
             }
 
             tracker.send(hit.build());
@@ -313,11 +315,14 @@ public class GoogleAnalyticsBridge extends ReactContextBaseJavaModule {
         {
             tracker.setScreenName(screenName);
             HitBuilders.ScreenViewBuilder screenBuilder = new HitBuilders.ScreenViewBuilder();
-            ReadableMapKeySetIterator iterator = dimensionIndexValues.keySetIterator();
-            while (iterator.hasNextKey()) {
-                String dimensionIndex = iterator.nextKey();
-                String dimensionValue = dimensionIndexValues.getString(dimensionIndex);
-                screenBuilder.setCustomDimension(Integer.parseInt(dimensionIndex), dimensionValue);
+
+            if (dimensionIndexValues != null) {
+                ReadableMapKeySetIterator iterator = dimensionIndexValues.keySetIterator();
+                while (iterator.hasNextKey()) {
+                    String dimensionIndex = iterator.nextKey();
+                    String dimensionValue = dimensionIndexValues.getString(dimensionIndex);
+                    screenBuilder.setCustomDimension(Integer.parseInt(dimensionIndex), dimensionValue);
+                }
             }
             tracker.send(screenBuilder.build());
         }
@@ -353,11 +358,13 @@ public class GoogleAnalyticsBridge extends ReactContextBaseJavaModule {
                 }
             }
 
-            ReadableMapKeySetIterator iterator = dimensionIndexValues.keySetIterator();
-            while (iterator.hasNextKey()) {
-                String dimensionIndex = iterator.nextKey();
-                String dimensionValue = dimensionIndexValues.getString(dimensionIndex);
-                hit.setCustomDimension(Integer.parseInt(dimensionIndex), dimensionValue);
+            if (dimensionIndexValues != null) {
+                ReadableMapKeySetIterator iterator = dimensionIndexValues.keySetIterator();
+                while (iterator.hasNextKey()) {
+                    String dimensionIndex = iterator.nextKey();
+                    String dimensionValue = dimensionIndexValues.getString(dimensionIndex);
+                    hit.setCustomDimension(Integer.parseInt(dimensionIndex), dimensionValue);
+                }
             }
 
             if(metricIndexValues != null){
